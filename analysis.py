@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 from scipy import stats
 from utils import *
 
+# constants
+OUTCOMES = ["reversibility", "willingness", "risk", "bother"]
+
 # load dataset
 df = pd.read_csv("./data/responses.csv")
 
@@ -20,5 +23,9 @@ state_map = {
 df_domain_1["state"] = df_domain_1["task"].map(state_map)
 df_domain_2["state"] = df_domain_2["task"].map(state_map)
 
-reversibility_page_trend_results = perform_page_trend_test([df_domain_1, df_domain_2], "reversibility")
-print(reversibility_page_trend_results)
+# perform Page rank tests
+for outcome in OUTCOMES:
+    page_results = perform_page_trend_test([df_domain_1, df_domain_2], outcome)
+    print(f"Page rank test results for {outcome}:")
+    print(page_results)
+    print()
