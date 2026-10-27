@@ -2,28 +2,29 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-def page_trend_test(wide, states):
+def page_trend_test(wide, states, direction="increasing"):
     data = wide[states].dropna().to_numpy()
     n, k = data.shape
 
-    ranks = np.array([
-        stats.rankdata(row, method="average")
-        for row in data
-    ])
+    ranks = np.array([ stats.rankdata(row, method="average") for row in data ])
 
     R = ranks.sum(axis=0)
     weights = np.arange(1, k + 1)
     L = np.sum(weights * R)
     expected_L = n * k * (k + 1)**2 / 4
-    variance_L = (
-        n * k**2 * (k + 1) * (k**2 - 1) / 144
-    )
+    variance_L = n * k**2 * (k + 1) * (k**2 - 1) / 144
     z = (L - expected_L) / np.sqrt(variance_L)
-    p = stats.norm.sf(z)
+
+    if direction == "increasing":
+        p = stats.norm.sf(z)
+    elif direction == "decreasing":
+        p = stats.norm.cdf(z)
+    else:
+        raise ValueError("Direction must be 'increasing' or 'decreasing'.")
 
     return L, z, p, R
 
-def perform_page_trend_test(dfs, value):
+def perform_page_trend_test(dfs, value, direction):
     # extract the domains
     df_domain_1, df_domain_2 = dfs
 
@@ -36,10 +37,7 @@ def perform_page_trend_test(dfs, value):
     page_test_results = []
 
     for name, wide in [("file", wide_1), ("messaging", wide_2)]:
-        L, z, p, R = page_trend_test(
-            wide,
-            ["S0", "S1", "S2", "S3"]
-        )
+        L, z, p, R = page_trend_test(wide, ["S0", "S1", "S2", "S3"], direction=direction)
 
         page_test_results.append({
             "domain": name,

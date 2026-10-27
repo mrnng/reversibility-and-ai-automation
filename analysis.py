@@ -24,8 +24,13 @@ df_domain_1["state"] = df_domain_1["task"].map(state_map)
 df_domain_2["state"] = df_domain_2["task"].map(state_map)
 
 # perform Page rank tests
-for outcome in OUTCOMES:
-    page_results = perform_page_trend_test([df_domain_1, df_domain_2], outcome)
+for outcome in ["reversibility", "willingness"]:
+    page_results = perform_page_trend_test([df_domain_1, df_domain_2], outcome, direction="increasing")
+    print(f"Page rank test results for {outcome}:")
+    print(page_results)
+    print()
+for outcome in ["risk", "bother"]:
+    page_results = perform_page_trend_test([df_domain_1, df_domain_2], outcome, direction="decreasing")
     print(f"Page rank test results for {outcome}:")
     print(page_results)
     print()
