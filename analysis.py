@@ -34,3 +34,20 @@ for outcome in ["risk", "bother"]:
     print(f"Page rank test results for {outcome}:")
     print(page_results)
     print()
+
+# perform Friedman tests
+for outcome in OUTCOMES:
+    friedman_results = perform_friedman_test([df_domain_1, df_domain_2], outcome)
+    print(f"Friedman test results for {outcome}:")
+    print(friedman_results)
+    print()
+
+# perform Wilcoxon tests
+all_pairwise = []
+for outcome in OUTCOMES:
+    pairwise_results = perform_pairwise_tests([df_domain_1, df_domain_2], outcome)
+    pairwise_results.insert(0, "outcome", outcome)
+    all_pairwise.append(pairwise_results)
+    print(f"Adjacent Wilcoxon tests for {outcome}:")
+    print(pairwise_results)
+    print()
