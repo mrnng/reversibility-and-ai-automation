@@ -37,14 +37,14 @@ def perform_page_trend_test(dfs, value, direction):
     page_test_results = []
 
     for name, wide in [("file", wide_1), ("messaging", wide_2)]:
-        L, z, p, R = page_trend_test(wide, ["S0", "S1", "S2", "S3"], direction=direction)
+        L, z, p, R = page_trend_test(wide, ["S0", "S1", "S2-H", "S2-A"], direction=direction)
 
         page_test_results.append({
             "domain": name,
             "S0_rank_sum": R[0],
             "S1_rank_sum": R[1],
-            "S2_rank_sum": R[2],
-            "S3_rank_sum": R[3],
+            "S2-H_rank_sum": R[2],
+            "S2-A_rank_sum": R[3],
             "Page_L": L,
             "z": z,
             "p": p
@@ -74,7 +74,7 @@ def perform_friedman_test(dfs, value):
     # perform the Friedman test
     friedman_test_results = []
     for name, wide in [("file", wide_1), ("messaging", wide_2)]:
-        chi2, p, W, n = friedman_test(wide, ["S0", "S1", "S2", "S3"])
+        chi2, p, W, n = friedman_test(wide, ["S0", "S1", "S2-H", "S2-A"])
 
         friedman_test_results.append({
             "domain": name,
@@ -160,7 +160,7 @@ def perform_pairwise_tests(dfs, value, n_boot=5000):
     pairwise_test_results = []
 
     for name, wide in [("file", wide_1), ("messaging", wide_2)]:
-        result = pairwise_wilcoxon(wide, ["S0", "S1", "S2", "S3"], n_boot=n_boot)
+        result = pairwise_wilcoxon(wide, ["S0", "S1", "S2-H", "S2-A"], n_boot=n_boot)
         result.insert(0, "domain", name)
         pairwise_test_results.append(result)
  

@@ -31,13 +31,13 @@ An AI agent can go through your files, figure out which ones you haven't used in
 
 You can restore them yourself by opening the recycle bin, selecting the files, and clicking restore, which takes about five minutes, but the names and dates of the files are lost forever.
 
-#### S2: Full human reversibility
+#### S2-H: Full human reversibility
 
 An AI agent can go through your files, figure out which ones you haven't used in a long time and that it determines you won't need again, and then delete them. It will do this periodically, without asking you each time.
 
 You can restore them yourself by opening the bin, selecting the files, and clicking restore, which takes about five minutes, and everything comes back exactly as it was.
 
-#### S3: Full agent reversibility
+#### S2-A: Full agent reversibility
 
 An AI agent can go through your files, figure out which ones you haven't used in a long time and that it determines you won't need again, and then delete them. It will do this periodically, without asking you each time.
 
@@ -57,13 +57,13 @@ An AI agent has access to your messaging app, and can send a message to your cli
 
 The app allows you to delete the message yourself. If you delete the message, the app will still show an empty message to the client, meaning they will know you sent something but not the contents of what you sent.
 
-#### S2: Full human reversibility
+#### S2-H: Full human reversibility
 
 An AI agent has access to your messaging app, and can send a message to your clients to update them whenever your scheduled meeting time changes. It will do this automatically, without asking you first.
 
 If a message is wrong, you can delete it yourself for everyone in a few taps, which takes about a minute. The message disappears completely.
 
-#### S3: Full agent reversibility
+#### S2-A: Full agent reversibility
 
 An AI agent has access to your messaging app, and can send a message to your clients to update them whenever your scheduled meeting time changes. It will do this automatically, without asking you first.
 
